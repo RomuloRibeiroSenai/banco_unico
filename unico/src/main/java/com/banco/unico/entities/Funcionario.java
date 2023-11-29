@@ -19,7 +19,6 @@ import lombok.EqualsAndHashCode;
         @UniqueConstraint(name = "email_ukey", columnNames = "email"),
         @UniqueConstraint(name = "cpf_ukey", columnNames = "cpf"),
         @UniqueConstraint(name = "telefone_ukey", columnNames = "telefone")
-
 })
 public class Funcionario extends Pessoa {
 

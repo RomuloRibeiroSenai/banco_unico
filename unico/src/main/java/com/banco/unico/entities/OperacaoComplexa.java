@@ -1,7 +1,6 @@
 package com.banco.unico.entities;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +25,10 @@ public class OperacaoComplexa {
     // origem destino
 
     @ManyToOne
-    @JoinColumn(name = "conta", foreignKey = @ForeignKey(name = "conta_fkey"))
-    private Conta conta;
+    @JoinColumn(name = "conta_origem", foreignKey = @ForeignKey(name = "conta_origem_fkey"))
+    private Conta conta_origem;
+
+    @ManyToOne
+    @JoinColumn(name = "conta_destino", foreignKey = @ForeignKey(name = "conta_destino_fkey"))
+    private Conta conta_destino;
 }

@@ -32,6 +32,9 @@ public class Conta {
     @OneToMany(mappedBy = "conta")
     private List<OperacaoSimples> operacaoSimples;
 
-    @OneToMany(mappedBy = "conta")
-    private List<OperacaoComplexa> operacaoComplexa;
+    @OneToMany(mappedBy = "conta_origem")
+    private List<OperacaoComplexa> operacaoComplexaOrigem;
+
+    @OneToMany(mappedBy = "conta_destino")
+    private List<OperacaoComplexa> operacaoComplexaDestino;
 }
