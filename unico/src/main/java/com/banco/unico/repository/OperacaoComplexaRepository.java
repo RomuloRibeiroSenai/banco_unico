@@ -1,9 +1,9 @@
-package com.banco.unico.repository;
+// package com.banco.unico.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.stereotype.Repository;
 
-@Repository
-public interface OperacaoComplexaRepository extends JpaRepository<OperacaoComplexaRepository, Long>{
+// @Repository
+// public interface OperacaoComplexaRepository extends JpaRepository<OperacaoComplexaRepository, Long>{
     
-}
+// }
