@@ -1,11 +1,16 @@
 package com.banco.unico.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.banco.unico.entities.Conta;
 import com.banco.unico.entities.OperacaoSimples;
+import com.banco.unico.repository.ClienteRepository;
+import com.banco.unico.repository.ContaRepository;
 import com.banco.unico.repository.OperacaoSimplesRepository;
 
 @Service
@@ -13,6 +18,8 @@ public class OperacaoSimplesService {
 
     @Autowired
     private OperacaoSimplesRepository operacaoSimplesRepository;
+    @Autowired
+    private ContaRepository contaRepository;
 
     public List<OperacaoSimples> getAllSimples() {
 
@@ -28,11 +35,15 @@ public class OperacaoSimplesService {
         return simples;
     }
 
-    public OperacaoSimples saveOperacaoSimples(OperacaoSimples novaOperacaoSimples) {
+    public OperacaoSimples saveOperacaoSimples(OperacaoSimples novaOperacaoSimples,Long id) {
+        //ver problema de como esta setando a conta 
+        // OperacaoSimples nova = new OperacaoSimples();
+        Conta conta = contaRepository.findById(id).orElse(null);
+        novaOperacaoSimples.setConta(conta);
+        novaOperacaoSimples.setData_hora(LocalDateTime.now());
+        operacaoSimplesRepository.save(novaOperacaoSimples);
 
-        OperacaoSimples nova = operacaoSimplesRepository.save(novaOperacaoSimples);
-
-        return nova;
+        return novaOperacaoSimples;
     }
 
     public OperacaoSimples updateOperacao(Long id, OperacaoSimples operacaoSimples) {

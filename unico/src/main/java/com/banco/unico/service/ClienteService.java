@@ -24,7 +24,6 @@ public class ClienteService {
     public Cliente getClienteById(Long id) {
 
         Cliente cliente = clienteRepository.findById(id).orElse(null);
-
         return cliente;
     }
 
@@ -36,7 +35,6 @@ public class ClienteService {
     public Cliente updateCliente(Long id, Cliente clienteAtualizado) {
 
         Optional<Cliente> cliente_novo = clienteRepository.findById(id);
-
         if (cliente_novo.isPresent()) {
             Cliente existente = cliente_novo.get();
             existente = clienteRepository.save(existente);

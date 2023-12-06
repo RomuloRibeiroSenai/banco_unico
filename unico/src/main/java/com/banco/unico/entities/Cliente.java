@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
@@ -33,5 +34,8 @@ public class Cliente extends Pessoa {
     @ManyToOne
     @JoinColumn(name = "endereco",foreignKey = @ForeignKey(name = "endereco_fkey"))
     private Endereco endereco;  
+
+    @OneToOne(mappedBy = "cliente")
+    private Conta conta;
     
 }

@@ -41,10 +41,10 @@ public class OperacaoSimplesController {
             return new ResponseEntity<>(simples, HttpStatus.NOT_FOUND);
         }
     }
-    @PostMapping
-    public ResponseEntity<OperacaoSimples> saveOperacaoSimples(@RequestBody OperacaoSimples novaSimples){
+    @PostMapping("/{id}")
+    public ResponseEntity<OperacaoSimples> saveOperacaoSimples(@RequestBody OperacaoSimples novaSimples, @PathVariable Long id ){
 
-        OperacaoSimples nova = simplesService.saveOperacaoSimples(novaSimples);
+        OperacaoSimples nova = simplesService.saveOperacaoSimples(novaSimples, id);
 
         return ResponseEntity.ok(nova);
     }
