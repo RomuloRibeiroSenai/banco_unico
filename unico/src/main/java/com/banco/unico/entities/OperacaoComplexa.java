@@ -1,6 +1,6 @@
 package com.banco.unico.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,7 +29,7 @@ public class OperacaoComplexa {
     @Column(nullable = false)
     private double valor;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDate data_hora;
+    private LocalDateTime data_hora;
     // origem destino
 
     @ManyToOne

@@ -6,5 +6,5 @@ import com.banco.unico.entities.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
-    
+    Cliente findByLoginAndSenha(String login, String senha);
 }
