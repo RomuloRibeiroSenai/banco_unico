@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.banco.unico.entities.Cliente;
 import com.banco.unico.entities.Conta;
 import com.banco.unico.repository.ContaRepository;
 

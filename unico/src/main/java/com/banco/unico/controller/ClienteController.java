@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.banco.unico.entities.Cliente;
 import com.banco.unico.entities.Login;
 import com.banco.unico.service.ClienteService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -56,7 +58,7 @@ public class ClienteController {
     public ResponseEntity<Long> login(@RequestBody Login login){
     String login1 = login.getLogin();
     String senha = login.getSenha();
-
+    System.out.println("Received login attempt - Username: " + login1 + ", Password: " + senha);
     Long clienteId = clienteService.findIdByLoginAndSenha(login1, senha);
 
     if (clienteId != null) {

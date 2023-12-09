@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.banco.unico.entities.Conta;
 import com.banco.unico.entities.OperacaoSimples;
-import com.banco.unico.repository.ClienteRepository;
+
 import com.banco.unico.repository.ContaRepository;
 import com.banco.unico.repository.OperacaoSimplesRepository;
 
