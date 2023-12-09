@@ -2,6 +2,9 @@ package com.banco.unico.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -27,14 +30,18 @@ public class Conta {
 
     @OneToOne
     @JoinColumn(name = "cliente", foreignKey = @ForeignKey(name = "cliente_fkey"))
+    @JsonBackReference
     private Cliente cliente;
 
     @OneToMany(mappedBy = "conta")
+    @JsonManagedReference
     private List<OperacaoSimples> operacaoSimples;
 
     @OneToMany(mappedBy = "conta_origem")
+    @JsonManagedReference
     private List<OperacaoComplexa> operacaoComplexaOrigem;
 
     @OneToMany(mappedBy = "conta_destino")
+    @JsonManagedReference
     private List<OperacaoComplexa> operacaoComplexaDestino;
 }

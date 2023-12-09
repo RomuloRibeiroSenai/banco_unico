@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.banco.unico.entities.Cliente;
 import com.banco.unico.entities.Conta;
 import com.banco.unico.repository.ContaRepository;
 
@@ -25,15 +26,32 @@ public class ContaService {
         Conta conta = contaRepository.findById(id).orElse(null);
         return conta;
     }
+    public Conta saveConta(Conta conta){
+        Conta nova_conta = contaRepository.save(conta);
+        return nova_conta;
+    }
     public Conta updateConta(Long id, Conta conta){
 
-        Optional<Conta> conta_nova = contaRepository.findById(id);
+        Optional<Conta> conta_antiga = contaRepository.findById(id);
 
-        if (conta_nova.isPresent()){
-            //dando erro no save
-            Conta antiga = conta_nova.save(antiga);
-            return antiga;
+        if (conta_antiga.isPresent()){
+         
+            Conta nova = conta_antiga.get();
+
+            nova.setNumero(conta.getNumero());
+            nova.setSaldo(conta.getSaldo());
+            nova.setTipo(conta.getTipo());
+
+            Conta conta_atualizada = contaRepository.save(nova);
+            return conta_atualizada;
         }
         return null;
     }
+    public Conta deleteConta(Long id){
+        contaRepository.deleteById(id);
+        Conta contaDeletada = getContaById(id);
+
+        return contaDeletada;
+    }
+    
 } 

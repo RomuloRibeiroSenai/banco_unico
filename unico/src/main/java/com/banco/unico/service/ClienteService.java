@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.banco.unico.entities.Cliente;
+import com.banco.unico.entities.Conta;
 import com.banco.unico.repository.ClienteRepository;
+import com.banco.unico.repository.ContaRepository;
 
 @Service
 public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    private ContaRepository contaRepository;
 
     public List<Cliente> getAllClientes() {
         List<Cliente> clientes = clienteRepository.findAll();
@@ -27,7 +31,14 @@ public class ClienteService {
         return cliente;
     }
 
-    public Cliente saveCliente(Cliente novoCliente) {
+    public Cliente saveCliente(Cliente novoCliente, Optional <Long> conta_id) {
+
+        
+        if(conta_id.isPresent()){
+            Optional<Conta> contaOptional = contaRepository.findById(conta_id.get());
+            Conta conta = contaOptional.get();
+            novoCliente.setConta(conta);
+        }
 
         Cliente cliente = clienteRepository.save(novoCliente);
         return cliente;
@@ -37,9 +48,21 @@ public class ClienteService {
         Optional<Cliente> cliente_novo = clienteRepository.findById(id);
         if (cliente_novo.isPresent()) {
             Cliente existente = cliente_novo.get();
-            existente = clienteRepository.save(existente);
 
-            return existente;
+            existente.setLogin(clienteAtualizado.getLogin());
+            existente.setSenha(clienteAtualizado.getSenha());
+            existente.setEndereco(clienteAtualizado.getEndereco());
+            //existente.setConta(clienteAtualizado.getConta());
+
+            if(clienteAtualizado.getConta() != null){
+                clienteAtualizado.getConta().setCliente(existente);
+                Conta contaAtualizada = contaRepository.save(clienteAtualizado.getConta());
+                existente.setConta(contaAtualizada);
+            }
+
+            clienteAtualizado = clienteRepository.save(existente);
+
+            return clienteAtualizado;
         }
         return null;
     }
@@ -55,7 +78,8 @@ public class ClienteService {
     public Cliente logicalDeleteCliente(Long id) {
         Cliente clienteExistente = getClienteById(id);
         clienteExistente.setAtivo(false);
-        saveCliente(clienteExistente);
+        Optional<Long> opicional = Optional.ofNullable(clienteExistente.getId());
+        saveCliente(clienteExistente, opicional);
 
         return clienteExistente;
     }

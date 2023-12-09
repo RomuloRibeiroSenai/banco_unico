@@ -1,6 +1,7 @@
 package com.banco.unico.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +48,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente novoCliente){
 
-        Cliente cliente = clienteService.saveCliente(novoCliente);
+        Cliente cliente = clienteService.saveCliente(novoCliente, Optional.empty());
         return ResponseEntity.ok(cliente);
     }
     @PutMapping("/{id}")

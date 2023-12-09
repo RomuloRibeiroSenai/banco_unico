@@ -1,5 +1,7 @@
 package com.banco.unico.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,7 @@ public class Cliente extends Pessoa {
     private Endereco endereco;  
 
     @OneToOne(mappedBy = "cliente")
+    @JsonManagedReference
     private Conta conta;
     
 }

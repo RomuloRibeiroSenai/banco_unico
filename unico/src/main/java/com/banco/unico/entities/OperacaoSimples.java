@@ -1,7 +1,11 @@
 package com.banco.unico.entities;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
+
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,14 +30,12 @@ public class OperacaoSimples {
     private String tipo;
     @Column(nullable = false)
     private double valor;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime data_hora;
     // destino 
     
     @ManyToOne
     @JoinColumn(name = "conta", foreignKey = @ForeignKey(name = "conta_fkey"))
+    @JsonBackReference
     private Conta conta;
-//     public OperacaoSimples(OperacaoSimples operacao, Conta conta){
-//         operacao.setConta(conta);
-
-// }
 }

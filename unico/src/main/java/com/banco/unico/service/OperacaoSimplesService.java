@@ -52,7 +52,8 @@ public class OperacaoSimplesService {
 
         if (simples_nova.isPresent()) {
             OperacaoSimples antiga = simples_nova.get();
-
+            antiga.setTipo(operacaoSimples.getTipo());
+            antiga.setValor(operacaoSimples.getValor());
             antiga = operacaoSimplesRepository.save(antiga);
             return antiga;
         }
